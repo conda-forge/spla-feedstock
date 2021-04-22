@@ -10,8 +10,10 @@ source:
   sha256: 364a9fe759fddec8a0839cf79f1cf0619fc36f4d4c15f1c2b1f437249d7840c6
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win]
+  run_exports:
+    - {{ pin_compatible('spla', max_pin='x') }}
 
 requirements:
   build:
