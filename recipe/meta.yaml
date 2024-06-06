@@ -10,7 +10,7 @@ source:
   sha256: bc0c366e228344b1b2df55b9ce750d73c1165380e512da5a04d471db126d66ce
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   run_exports:
     - {{ pin_subpackage('spla', max_pin='x') }}
@@ -19,6 +19,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
+    - {{ stdlib("c") }}
     - make
     - cmake >=3.11.0
   host:
