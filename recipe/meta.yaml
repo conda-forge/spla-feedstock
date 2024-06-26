@@ -1,5 +1,5 @@
 {% set name = "spla" %}
-{% set version = "1.6.0" %}
+{% set version = "1.6.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/eth-cscs/spla/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 917c24e2a768499967eba47b2cc2475df9fabee327b7821d24970b6a08055c09
+  sha256: 62b51e6ce05c41cfc1c6f6600410f9549a209c50f0331e1db41047f94493e02f
 
 build:
   number: 0
