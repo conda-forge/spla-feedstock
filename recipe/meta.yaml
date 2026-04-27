@@ -1,46 +1,91 @@
 {% set name = "spla" %}
 {% set version = "1.6.1" %}
 
+{% set build = 0 %}
+
+{% set mpi = mpi or "openmpi" %}
+{% set mpi_prefix = "mpi_" + mpi %}
+
 package:
   name: {{ name|lower }}
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
   url: https://github.com/eth-cscs/spla/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 62b51e6ce05c41cfc1c6f6600410f9549a209c50f0331e1db41047f94493e02f
 
 build:
-  number: 2
-  skip: true  # [win]
-  run_exports:
-    - {{ pin_subpackage('spla', max_pin='x') }}
+  number: {{ build }}
+  skip: True  # [win]
 
-requirements:
-  build:
-    - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}
-    - {{ stdlib("c") }}
-    - make
-    - cmake >=3.11.0
-  host:
-    - {{ mpi }}
-    - libcblas
-  run:
-    - {{ mpi }}
-
-test:
-  commands:
-    - test -f "${PREFIX}/lib/libspla${SHLIB_EXT}"
+outputs:
+  - name: spla
+    script: build-spla.sh
+    build:
+      string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
+      run_exports:
+        - {{ pin_subpackage("spla", max_pin="x.x") }}
+    requirements:
+      build:
+        - {{ compiler("c") }}
+        - {{ stdlib("c") }}
+        - {{ compiler("cxx") }}
+        - {{ compiler("fortran") }}
+        - {{ mpi }}
+        - cmake >=3.18
+        - ninja
+        - pkg-config
+      host:
+        - {{ mpi }}
+        - libcblas
+      run:
+        - {{ mpi }}
+        - libcblas
+    test:
+      commands:
+        - test -f "${PREFIX}/lib/libspla${SHLIB_EXT}"
+    about:
+      summary: Specialized Linear Algebra (SpLA) shared library, tailored for computational material science codes.
+  - name: spla-static
+    script: build-spla.sh
+    build:
+      string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
+      run_exports:
+        - {{ pin_subpackage("spla-static", max_pin="x.x") }}
+    requirements:
+      build:
+        - {{ compiler("c") }}
+        - {{ stdlib("c") }}
+        - {{ compiler("cxx") }}
+        - {{ compiler("fortran") }}
+        - {{ mpi }}
+        - cmake >=3.18
+        - ninja
+        - pkg-config
+      host:
+        - {{ mpi }}
+        - libcblas
+      run:
+        - {{ mpi }}
+        - libcblas
+    test:
+      commands:
+        - test -f "${PREFIX}/lib/libspla.a"
+    about:
+      summary: Specialized Linear Algebra (SpLA) static library, tailored for computational material science codes.
 
 about:
   home: https://github.com/AdhocMan/spla
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
-  summary: Specialized linear algebra library, tailored for computational material science codes.
+  summary: Specialized Linear Algebra (SpLA) library, tailored for computational material science codes.
   description: |
-    SPLA provides specialized functions for distributed matrix multiplication, as required in some computational material science codes. It aims for maximum computation and communication overlap when possible and allows any combination of host and device pointers if compiled with GPU support. C++, C  and Fortran interfaces are available.
-
+    SPLA provides specialized functions for distributed matrix multiplication,
+    as required in some computational material science codes. It aims for
+    maximum computation and communication overlap when possible and allows any
+    combination of host and device pointers if compiled with GPU support. C++, C
+    and Fortran interfaces are available.
   doc_url: https://spla.readthedocs.io/en/latest/?badge=latest
   dev_url: https://github.com/eth-cscs/spla
 
@@ -48,3 +93,4 @@ extra:
   recipe-maintainers:
     - AdhocMan
     - ltalirz
+    - mkrack

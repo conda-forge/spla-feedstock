@@ -3,18 +3,35 @@ About spla-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/spla-feedstock/blob/main/LICENSE.txt)
 
+
+About spla
+----------
+
 Home: https://github.com/AdhocMan/spla
 
 Package license: BSD-3-Clause
 
-Summary: Specialized linear algebra library, tailored for computational material science codes.
+Summary: Specialized Linear Algebra (SpLA) shared library, tailored for computational material science codes.
 
 Development: https://github.com/eth-cscs/spla
 
 Documentation: https://spla.readthedocs.io/en/latest/?badge=latest
 
-SPLA provides specialized functions for distributed matrix multiplication, as required in some computational material science codes. It aims for maximum computation and communication overlap when possible and allows any combination of host and device pointers if compiled with GPU support. C++, C  and Fortran interfaces are available.
+SPLA provides specialized functions for distributed matrix multiplication,
+as required in some computational material science codes. It aims for
+maximum computation and communication overlap when possible and allows any
+combination of host and device pointers if compiled with GPU support. C++, C
+and Fortran interfaces are available.
 
+
+About spla-static
+-----------------
+
+
+
+Package license: 
+
+Summary: Specialized Linear Algebra (SpLA) static library, tailored for computational material science codes.
 
 Current build status
 ====================
@@ -89,6 +106,20 @@ Current build status
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/spla-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_mpiopenmpi" alt="variant">
                 </a>
               </td>
+            </tr><tr>
+              <td>osx_arm64_mpimpich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12519&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/spla-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_mpimpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_mpiopenmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12519&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/spla-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_mpiopenmpi" alt="variant">
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -103,6 +134,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-spla-green.svg)](https://anaconda.org/conda-forge/spla) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/spla.svg)](https://anaconda.org/conda-forge/spla) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/spla.svg)](https://anaconda.org/conda-forge/spla) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/spla.svg)](https://anaconda.org/conda-forge/spla) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-spla--static-green.svg)](https://anaconda.org/conda-forge/spla-static) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/spla-static.svg)](https://anaconda.org/conda-forge/spla-static) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/spla-static.svg)](https://anaconda.org/conda-forge/spla-static) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/spla-static.svg)](https://anaconda.org/conda-forge/spla-static) |
 
 Installing spla
 ===============
@@ -114,16 +146,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `spla` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `spla, spla-static` can be installed with `conda`:
 
 ```
-conda install spla
+conda install spla spla-static
 ```
 
 or with `mamba`:
 
 ```
-mamba install spla
+mamba install spla spla-static
 ```
 
 It is possible to list all of the versions of `spla` available on your platform with `conda`:
@@ -220,4 +252,5 @@ Feedstock Maintainers
 
 * [@AdhocMan](https://github.com/AdhocMan/)
 * [@ltalirz](https://github.com/ltalirz/)
+* [@mkrack](https://github.com/mkrack/)
 
