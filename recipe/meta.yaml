@@ -1,7 +1,7 @@
 {% set name = "spla" %}
 {% set version = "1.6.1" %}
 
-{% set build = 1 %}
+{% set build = 3 %}
 
 {% set mpi = mpi or "openmpi" %}
 {% set mpi_prefix = "mpi_" + mpi %}
@@ -39,12 +39,12 @@ outputs:
         - {{ mpi }}
         - _openmp_mutex
         - libcblas
-        - "openblas >=0.3.30 *openmp_*"
+        - "openblas * *openmp_*"
       run:
         - {{ mpi }}
         - _openmp_mutex
         - libcblas
-        - "openblas >=0.3.30 *openmp_*"
+        - "openblas * *openmp_*"
     test:
       commands:
         - test -f "${PREFIX}/lib/libspla${SHLIB_EXT}"
